@@ -1,0 +1,96 @@
+{% extends "Policy/index.html"%} {% block createPartner%}
+<div class="card">
+  <div class="card-header" style="background: black; color: white">
+    <h2 style="display: inline">Create Business Partner</h2>
+  </div>
+  <div class="card-body" style="padding: 2em">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a
+          class="nav-item nav-link active"
+          id="nav-home-tab"
+          data-toggle="tab"
+          href="#nav-home"
+          role="tab"
+          aria-controls="nav-home"
+          aria-selected="true"
+          >Insurance</a
+        >
+        <a
+          class="nav-item nav-link"
+          id="nav-profile-tab"
+          data-toggle="tab"
+          href="#nav-profile"
+          role="tab"
+          aria-controls="nav-profile"
+          aria-selected="false"
+          >Agent</a
+        >
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="insurance-form tab-pane fade show active"
+        id="nav-home"
+        role="tabpanel"
+        aria-labelledby="nav-home-tab"
+      >
+        <br />
+        <br />
+        <form method="POST">
+          {% csrf_token %}
+          <!--  -->
+          {{ insuranceForm.errors }} {{ insuranceForm.non_field_errors }}
+          <!--  -->
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>{{insuranceForm.company_name.label}}</label>{{insuranceForm.company_name }}
+            </div>
+            <div class="form-group col-md-6">
+              <label> {{insuranceForm.registration_number.label}}</label>{{insuranceForm.registration_number}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6"><label>{{insuranceForm.email.label}}</label>{{insuranceForm.email }}</div>
+            <div class="form-group col-md-6"><label>{{insuranceForm.phone.label}}</label>{{insuranceForm.phone}}</div>
+          </div>
+          {{insuranceForm.bp_Type}} {{insuranceForm.role}}
+          <br />
+          <input name="insurance" type="submit" value="Submit" class="btn btn-primary button ml-auto" />
+        </form>
+      </div>
+      <div class="agent-form tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <br />
+        <br />
+        <form method="POST">
+          {% csrf_token %}
+          <!--  -->
+          {{ agentForm.errors }} {{ agentForm.non_field_errors }}
+          <!--  -->
+          <div class="row">
+            <div class="form-group col-md-6"><label>{{agentForm.first_name.label}}</label>{{agentForm.first_name}}</div>
+            <div class="form-group col-md-6"><label>{{agentForm.last_name.label}}</label>{{agentForm.last_name}}</div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>{{agentForm.DOB.label}}</label>
+              <i class="fas fa-calendar DOB-agent input-prefix ml-auto" id="fa-calendar" tabindex="0"></i>
+              {{agentForm.DOB}}
+            </div>
+            <div class="form-group col-md-6"><label>{{agentForm.phone.label}}</label>{{agentForm.phone}}</div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6"><label>{{agentForm.email.label}}</label>{{agentForm.email}}</div>
+          </div>
+          {{agentForm.bp_Type}} {{agentForm.role}}
+          <br />
+          <input name="agent" type="submit" value="Submit" class="btn btn-primary button ml-auto" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ############################################## -->
+
+{% endblock %}

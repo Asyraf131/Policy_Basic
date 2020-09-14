@@ -1,0 +1,54 @@
+{% extends "Policy/index.html"%} {% block BP_Detail_page%}
+<div class="card">
+  <div class="card-header" style="background: black; color: white">
+    <a href="{% url 'policy:bp_list' %}"
+      ><i class="fas fa-arrow-circle-left" style="font-size: 25px; color: rgb(230, 52, 52)"></i
+    ></a>
+    <h2 style="display: inline">&nbsp; Business Partner ({{partner.role}})</h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">BP ID</div>
+      <div class="col-sm-6">{{partner.id}}</div>
+    </div>
+
+    {% if partner.role.role_name == 'Policy Holder' or partner.role.role_name == 'Agent'%}
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">First name</div>
+      <div class="col-sm-6">{{partner.first_name}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Last name</div>
+      <div class="col-sm-6">{{partner.last_name}}</div>
+    </div>
+
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Date of Birth</div>
+      <div class="col-sm-6">{{partner.DOB|date:'d/m/Y'}}</div>
+    </div>
+    <hr />
+
+    {% else %}
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Company Name</div>
+      <div class="col-sm-6">{{partner.company_name}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Registration Number</div>
+      <div class="col-sm-6">{{partner.registration_number}}</div>
+    </div>
+    <hr />
+
+    {% endif %}
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Email</div>
+      <div class="col-sm-6">{{partner.email}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Mobile</div>
+      <div class="col-sm-6">{{partner.phone}}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

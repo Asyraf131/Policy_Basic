@@ -1,0 +1,67 @@
+{% extends "Policy/index.html"%} {% block createPolicy%}
+<div class="card">
+  <div class="card-header" style="background: black; color: white">
+    <h2 style="display: inline">i<span style="color: #ffab40">2</span>go - Your Online {{productName}} Solution</h2>
+  </div>
+  <div class="card-body" style="padding: 2em">
+    <form method="POST">
+      <br />
+      <div style="color: red">
+        {% csrf_token %} {{ policy.management_form }} {% for po in policy %}
+        <!--  -->
+        {{ form.errors }} {{ form.non_field_errors }}
+        <!--  -->
+        {% for dict in policy.errors %} {% for error in dict.values %} {{ error }} {% endfor %} {% endfor %}
+        <!--  -->
+        {{ policy.non_form_errors }}
+        <!--  -->
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6"><label>{{po.insurance.label}}</label>{{po.insurance }}</div>
+        <div class="form-group col-md-6"><label>{{po.agent.label}}</label>{{po.agent}}</div>
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div class="row">
+        <div class="form-group col-md-6"><label>{{form.first_name.label}}</label>{{form.first_name}}</div>
+        <div class="form-group col-md-6"><label>{{form.last_name.label}}</label>{{form.last_name}}</div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>{{form.DOB.label}}</label>
+          <i class="fas fa-calendar DOB input-prefix ml-auto" id="fa-calendar" tabindex="0"></i>
+          {{form.DOB}}
+        </div>
+        <div class="form-group col-md-6"><label>{{form.phone.label}}</label>{{form.phone}}</div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6"><label>{{form.email.label}}</label>{{form.email}}</div>
+        <div class="form-group col-md-6">
+          <label>Policy Start Date</label>
+          <i class="fas fa-calendar effective-date input-prefix ml-auto" id="fa-calendar" tabindex="0"></i>
+          {{po.effective_date}}
+        </div>
+      </div>
+      <br />
+      <hr />
+      <br />
+
+      <div class="row">
+        <div class="form-group col-md-6"><label>{{po.status.label}}</label>{{po.status}}</div>
+        <div class="form-group col-md-6"><label>{{po.transaction_type.label}}</label>{{po.transaction_type}}</div>
+      </div>
+      <div class="form-group col-md-6 pl-0">
+        <label>{{po.period_of_cover.label}} (Months)</label>{{po.period_of_cover}}
+      </div>
+      <br />
+      <br />
+      {{form.role}}{{form.bp_Type}}{{po.product}} {% endfor %}
+      <button type="submit" class="btn btn-primary button ml-auto">Create New Policy</button>
+    </form>
+  </div>
+</div>
+
+<!-- ############################################## -->
+
+{% endblock %}

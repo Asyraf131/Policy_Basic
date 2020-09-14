@@ -1,0 +1,108 @@
+{% extends "Policy/index.html"%} {% block policyDetail_page%}
+<div class="card">
+  <div class="card-header" style="background: black; color: white">
+    <a href="{% url 'policy:policy_list' %}"
+      ><i class="fas fa-arrow-circle-left" style="font-size: 25px; color: rgb(230, 52, 52)"></i
+    ></a>
+    <h2 style="display: inline">&nbsp; Policy ID: {{Policy.id}}</h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Insurance</div>
+      <div class="col-sm-6">{{Policy.insurance.company_name}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Product</div>
+      <div class="col-sm-6">{{Policy.product.product}}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Creation Date</div>
+      <div class="col-sm-6">{{Policy.created_date|date:'d/m/Y g:i a'}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Updated Date</div>
+      <div class="col-sm-6">{{Policy.updated_date|date:'d/m/Y g:i a'}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Effective Date</div>
+      <div class="col-sm-6">{{Policy.effective_date|date:'d/m/Y'}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Period of Cover</div>
+      <div class="col-sm-6">{{Policy.effective_date|date:'d/m/Y'}} to {{End_Date|date:'d/m/Y'}}</div>
+    </div>
+
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Client</div>
+      <div class="col-sm-6">
+        <a href="{% url 'policy:bp_detail' Policy.policy_holder.id Policy.policy_holder.role %}"
+          >{{Policy.policy_holder.full_name}}</a
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Email</div>
+      <div class="col-sm-6">{{Policy.policy_holder.email}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Mobile No</div>
+      <div class="col-sm-6">{{Policy.policy_holder.phone}}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Agent</div>
+      <div class="col-sm-6">{{Policy.agent.full_name}}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Status</div>
+      <div class="col-sm-6">{{Policy.status.status_name}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Transaction Type</div>
+      <div class="col-sm-6">{{Policy.transaction_type.transaction_type}}</div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+
+<div class="card">
+  <div class="card-header" style="background: black; color: white">
+    <h2 style="display: inline">Partner</h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Agent</div>
+      <div class="col-sm-6">
+        <a href="{% url 'policy:bp_detail' Policy.agent.id Policy.agent.role %}">{{Policy.agent.full_name}}</a>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Client</div>
+      <div class="col-sm-6">
+        <a href="{% url 'policy:bp_detail' Policy.policy_holder.id Policy.policy_holder.role %}"
+          >{{Policy.policy_holder.full_name}}</a
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Email</div>
+      <div class="col-sm-6">{{Policy.policy_holder.email}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Mobile No</div>
+      <div class="col-sm-6">{{Policy.policy_holder.phone}}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6 font-weight-bold">Date of Birth</div>
+      <div class="col-sm-6">{{Policy.policy_holder.DOB|date:'d/m/Y'}}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

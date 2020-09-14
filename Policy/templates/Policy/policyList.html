@@ -1,0 +1,32 @@
+{% extends "Policy/index.html"%} {% block policyList_section%}
+<table class="table table-striped table-hover">
+  <thead style="background: black; color: white">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Creation Date</th>
+      <th scope="col">Creation Time</th>
+      <th scope="col">Updated Date</th>
+      <th scope="col">Reference No</th>
+      <th scope="col">Client</th>
+      <th scope="col">Product</th>
+      <th scope="col">Agent</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for policy in Policies %} {{policy.policy_holder_id.full_name}}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{policy.created_date|date:'d/m/Y'}}</td>
+      <td>{{policy.created_date|date:'g:i a'}}</td>
+      <td>{{policy.updated_date|date:'d/m/Y'}}</td>
+      <td><a href="{% url 'policy:policy_detail' pk=policy.id %}">{{policy.id}}</a></td>
+      <td>{{policy.policy_holder.full_name}}</td>
+      <td>{{policy.product.product}}</td>
+      <td>{{policy.agent.full_name}}</td>
+      <td>{{policy.status}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

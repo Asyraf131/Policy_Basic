@@ -1,0 +1,31 @@
+{% extends "Policy/index.html"%} {% block businessPartnersList_section%} {% load poll_extras %}
+<a href="{% url 'policy:partner_create' %}"><i class="fas fa-user-plus"></i></a>
+<table class="table table-striped table-hover">
+  <thead style="background: black; color: white">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name/Company</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Role</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for BP in BusinessPartners %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <th scope="row">
+        <a href="{% url 'policy:bp_detail' BP.id BP.role.role_name|dashURL %}">{{BP.id}}</a>
+      </th>
+      <td>{% firstof BP.full_name BP.company_name %}</td>
+      <td>{{BP.email}}</td>
+      <td>{{BP.phone}}</td>
+      <td>{{BP.role}}</td>
+      <td>{{BP.bp_Type}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
