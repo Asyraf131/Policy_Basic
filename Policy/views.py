@@ -13,6 +13,7 @@ from itertools import chain
 import datetime
 from .forms import PolicyForm, PolicyFormSet, HolderForm, InsuranceForm, AgentForm
 from django.views.generic import CreateView
+from .signals import new_policy
 
 # Create your views here.
 
@@ -27,7 +28,7 @@ class NavBar(View):
 class BusinessPartnerListView(View):
     def get(self, request):
         product = Product.objects.all()
-        partners = BusinessPartner.objects.all()
+        partners = BusinessPartner.objects.all().order_by('-id')
         context = {'BusinessPartners': partners, 'Products': product}
 
         return render(request, 'Policy/partnerList.html', context)
@@ -89,7 +90,7 @@ class PolicyListView(View):
 
     def get(self, request):
         product = Product.objects.all()
-        policyList = Policy.objects.all()
+        policyList = Policy.objects.all().order_by('-id')
         context = {'Policies': policyList, 'Products': product}
 
         return render(request, 'Policy/policyList.html', context)
@@ -115,7 +116,6 @@ class PolicyCreateView(CreateView):
     template_name = 'Policy/policyCreation.html'
     form_class = HolderForm
     success_url = '/policy/list'
-
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

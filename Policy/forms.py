@@ -6,6 +6,7 @@ from django.utils import timezone
 from django import forms
 from .models import PolicyStatus, PolicyTransactionType, PartnerRole, PartnerType, Product, Policy, BusinessPartner
 import datetime
+from .signals import new_policy
 
 
 class InsuranceForm(forms.ModelForm):
@@ -79,6 +80,16 @@ class PolicyForm(forms.ModelForm):
         self.product_id = kwargs.pop('product_id')
         super(PolicyForm, self).__init__(*args, **kwargs)
         self.fields['product'].initial = self.product_id
+
+    def save(self, *args, **kwargs):
+        super(PolicyForm, self).save(*args, **kwargs)
+        newPolicy = self.instance
+        new_policy.send(sender=Policy,
+                        policy=newPolicy,
+                        holder=newPolicy.policy_holder,
+                        insurance=newPolicy.insurance,
+                        agent=newPolicy.agent,
+                        product=newPolicy.product)
 
     class Meta:
         model = Policy
